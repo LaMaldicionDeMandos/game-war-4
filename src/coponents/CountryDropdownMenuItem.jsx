@@ -1,13 +1,14 @@
 import React from "react";
 import {Image} from "react-bootstrap";
 
-const CountryDropdownMenuItem = React.forwardRef(({ children, onClick, flag, name }, ref) =>
+const CountryDropdownMenuItem = React.forwardRef(({ children, onClick, onSelect, country }, ref) =>
     <div className="bg-dark text-bg-dark navbar" onClick={(e) => {
       e.preventDefault();
-      onClick(e); // Pasar customData al hacer clic
+      onSelect(country);
+      onClick(e);
     }} ref={ref}>
-      <Image className="" src={`img/flags/${flag}.svg`} width={30} height={20}/>
-      <label className="navbar-brand text-bg-dark">{name }</label>
+      <Image className="" src={`img/flags/${country.code}.svg`} width={30} height={20}/>
+      <label className="navbar-brand text-bg-dark">{country.name}</label>
       {children}
     </div>
   );

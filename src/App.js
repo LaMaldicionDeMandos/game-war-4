@@ -18,11 +18,13 @@ const App = () => {
         setGlobalState(COUNTRIES, () => _countries);
       });
   }, []);
+
+  const onSelect = (country) => console.log(`Select country ${country.name}`);
   return (
     <div className="d-flex flex-column vh-100">
       <Navbar className="bg-dark text-white p-2" expand="lg">
         <div className="navbar-wrapper">
-          <CountryDropdown countries={countries}></CountryDropdown>
+          <CountryDropdown countries={countries} onSelect={onSelect}></CountryDropdown>
         </div>
       </Navbar>
       {/* Barra superior */}
