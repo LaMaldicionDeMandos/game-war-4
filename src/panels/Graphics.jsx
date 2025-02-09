@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Graphics.css";
+import "./css/Graphics.css";
 const GraphicPanel = () => {
   return (
     <div className="bg-light border-top p-2 graphic-panel">

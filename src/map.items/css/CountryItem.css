@@ -1,0 +1,21 @@
+.countryItem {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: -25px;
+    top: -25px;
+}
+
+.pole {
+    position: relative;
+    left: 20px;
+    top: 2px;
+}
+
+.flag {
+    position: relative;
+    width: 16px;
+    height: 12px;
+    left: 1px;
+    top: -2px;
+}

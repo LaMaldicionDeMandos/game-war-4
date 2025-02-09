@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./panels/Header";
 import Graphics from "./panels/Graphics";
 import MapPanel from "./panels/MapPanel";
 import worldService from './services/world.service';
+
 import {COUNTRIES, CURRENT_COUNTRY, setGlobalState, useGlobalState} from "./services/GlobalState";
-import {Image, Navbar, NavbarBrand} from "react-bootstrap";
-import CountryDropdownMenu from "./coponents/CountryDropdownMenu";
-import CountryDropdown from "./coponents/CountryDropdown";
+import FiltersPanel from "./panels/FiltersPanel";
 
 const App = () => {
   const [countries] = useGlobalState(COUNTRIES);
@@ -19,20 +19,11 @@ const App = () => {
       });
   }, []);
 
-  const onSelect = (country) => console.log(`Select country ${country.name}`);
   return (
     <div className="d-flex flex-column vh-100">
-      <Navbar className="bg-dark text-white p-2" expand="lg">
-        <div className="navbar-wrapper">
-          <CountryDropdown countries={countries} onSelect={onSelect}></CountryDropdown>
-        </div>
-      </Navbar>
-      {/* Barra superior */}
+      <Header countries={countries} />
       <div className="d-flex flex-grow-1">
-        {/* Sidebar izquierda */}
-        <div className="bg-light border-end p-2" style={{ width: "250px" }}>
-          Sidebar Izquierda
-        </div>
+        <FiltersPanel />
 
         {/* Contenido principal */}
         <div className="flex-grow-1 d-flex flex-column">

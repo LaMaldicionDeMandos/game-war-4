@@ -4,7 +4,7 @@ import CountryDropdownMenu from "./CountryDropdownMenu";
 import CountryDropdownMenuItem from "./CountryDropdownMenuItem";
 
 const CountryDropdown = ({countries, onSelect = () => {}}) => {
-  countries = [{code: 'onu', name: 'ONU'}].concat(countries);
+  countries = [{code: 'onu', name: 'ONU', position: {lat: 0, lng: 0}}].concat(countries);
   const [currentCountry, setCurrentCountry] = useState(countries[0]);
   const onSelectCurrentCountry = (country) => {
     setCurrentCountry(country);

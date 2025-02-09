@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {GoogleMap, LoadScript} from "@react-google-maps/api";
+import {CURRENT_COUNTRY, useGlobalState} from "../services/GlobalState";
+import MapItemsProvider from "../map.items/MapItemsProvider";
 
 const containerStyle = {
   width: "100%",
@@ -10,7 +12,7 @@ const API_KEY = "AIzaSyBIyQTq4WibUXVENFmjXyYphuMvTyL4-dY"; // Reemplázalo con t
 
 const MapPanel = () => {
   const mapRef = useRef(null);
-  const [markers, setMarkers] = useState([]);
+  const [currentCountry] = useGlobalState(CURRENT_COUNTRY);
   const [center, setCenter] = useState({
     lat: -34.603722,
     lng: -58.381592,
@@ -18,13 +20,12 @@ const MapPanel = () => {
   const [moving, setMoving] = useState(false);
 
   useEffect(() => {
-    /*
-    axios.get("https://api.example.com/locations")
-      .then(response => setMarkers(response.data))
-      .catch(error => console.error("Error cargando los marcadores", error));
-
-     */
-  }, []);
+    if (!currentCountry || currentCountry.code === 'onu') {
+      setCenter({lat: 0, lng: 0})
+    } else {
+      setCenter(currentCountry.position);
+    }
+  }, [currentCountry]);
 
   const  handleLoad = (map) => {
     mapRef.current = map;
@@ -48,13 +49,10 @@ const MapPanel = () => {
       <LoadScript googleMapsApiKey={API_KEY}>
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={handleLoad}
                    onCenterChanged={onMapChange}>
-          {markers.map((marker, index) => (
-            <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} />
-          ))}
+            {mapRef.current && currentCountry && <MapItemsProvider />}
         </GoogleMap>
       </LoadScript>
       <img src="img/circle.png"
-
            style={{
              position: "absolute",
              top: "50%",
